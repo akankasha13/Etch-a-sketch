@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  height: 500px;
+  width: 500px;
+  flex-direction: column;
+}
+
+.box {
+  background-color: rgb(226, 77, 199);
+  flex-grow: 1;
+  border: 1px solid black;
+}
+.new-container {
+  background-color: black;
+}
+.row {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+}
