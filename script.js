@@ -1,20 +1,11 @@
 const container = document.getElementById("container");
-
-// for (let i = 0; i < 256; i++) {
-//   const grid_1 = document.createElement("div");
-//   grid_1.classList.add("box");
-//   grid_1.addEventListener("mouseover", () => {
-//     grid_1.classList.add("new-container");
-//   });
-//   container.appendChild(grid_1);
-
-// }
+const eraserBtn = document.getElementById("eraser");
 
 let userInput = 16;
-document.getElementById("popUpBtn").addEventListener("click", () => {
-  userInput = prompt("Please enter the desired number of box");
-  container.innerHTML = null;
+const pink = "rgb(235, 90, 138)";
+let colour = "rgb(235, 90, 138)";
 
+function sixteen() {
   for (let i = 0; i < userInput; i++) {
     const newRow = document.createElement("div");
     newRow.classList.add("row");
@@ -23,7 +14,30 @@ document.getElementById("popUpBtn").addEventListener("click", () => {
       const newBox = document.createElement("div");
       newBox.classList.add("box");
       newRow.appendChild(newBox);
+      newBox.addEventListener("mouseover", () => {
+        newBox.style.backgroundColor = colour;
+      });
     }
     container.appendChild(newRow);
+  }
+}
+
+sixteen();
+
+eraserBtn.addEventListener("click", () => {
+  if (colour == pink) {
+    colour = "rgb(255,255,255)";
+  } else {
+    colour = pink;
+  }
+});
+
+document.getElementById("popUpBtn").addEventListener("click", () => {
+  userInput = prompt("Please enter the desired number of boxes");
+  container.innerHTML = null;
+  if (userInput > 100) {
+    alert("Please enter a value less than 100");
+  } else {
+    sixteen();
   }
 });
