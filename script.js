@@ -1,9 +1,10 @@
 const container = document.getElementById("container");
 const eraserBtn = document.getElementById("eraser");
+const randomBtn = document.getElementById("random");
 
 let userInput = 16;
 const pink = "rgb(235, 90, 138)";
-let colour = "rgb(235, 90, 138)";
+let coloured = -1;
 
 function sixteen() {
   for (let i = 0; i < userInput; i++) {
@@ -15,20 +16,35 @@ function sixteen() {
       newBox.classList.add("box");
       newRow.appendChild(newBox);
       newBox.addEventListener("mouseover", () => {
-        newBox.style.backgroundColor = colour;
+        newBox.style.backgroundColor = randomColour();
       });
     }
     container.appendChild(newRow);
   }
 }
+function randomColour() {
+  if (coloured == 0) return "white";
+  if (coloured == -1) return pink;
 
-sixteen();
+  let r = Math.floor(Math.random() * 255);
+  let g = Math.floor(Math.random() * 255);
+  let b = Math.floor(Math.random() * 255);
+  return `rgb(${r}, ${g}, ${b})`;
+}
 
 eraserBtn.addEventListener("click", () => {
-  if (colour == pink) {
-    colour = "rgb(255,255,255)";
+  if (coloured == 0) {
+    coloured = -1;
   } else {
-    colour = pink;
+    coloured = 0;
+  }
+});
+
+randomBtn.addEventListener("click", () => {
+  if (coloured == 1) {
+    coloured = -1;
+  } else {
+    coloured = 1;
   }
 });
 
@@ -41,3 +57,5 @@ document.getElementById("popUpBtn").addEventListener("click", () => {
     sixteen();
   }
 });
+
+sixteen();
